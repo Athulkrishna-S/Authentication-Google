@@ -22,7 +22,7 @@ To get started with this project, follow these steps:
    ```sh
    git clone https://github.com/Athulkrishna-S/Authentication-Google.git
 2. Install dependencies:
-
+   ```sh
    npm install
 # Configuration
 
