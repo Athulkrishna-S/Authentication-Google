@@ -8,9 +8,7 @@ This repository contains an implementation of Google OAuth2 authentication using
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
-- [Libraries and Modules](#libraries-and-modules)
-- [Routes](#routes)
-- [License](#license)
+
 
 ## Overview
 
