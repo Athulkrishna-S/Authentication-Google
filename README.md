@@ -20,7 +20,7 @@ To get started with this project, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/express-google-oauth2-auth.git
+   git clone https://github.com/Athulkrishna-S/Authentication-Google.git
 2. Install dependencies:
 
    npm install
