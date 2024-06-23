@@ -12,9 +12,10 @@ router.use(session({
     resave: true,
     saveUninitialized: true
   }));
+
   
 router.use(passport.initialize());
-router.use(passport.session());
+//router.use(passport.session());
   
 interface User { 
     id: string,
@@ -39,25 +40,28 @@ passport.use(new GoogleStrategy({
 }));
 
 
+/*
 passport.serializeUser((user: Express.User, done) => {
     done(null, user);
   });
   
-  passport.deserializeUser((user: Express.User, done) => {
+//passport.deserializeUser((user: Express.User, done) => {
     done(null, user);
   });
 
+  */
 router.get('/google', passport.authenticate('google',{scope : ['profile']}));
-router.get('/google/callback',passport.authenticate('google',{failureRedirect : '/'}),
+router.get('/google/callback',passport.authenticate('google',{session : false,failureRedirect : '/'}),
 // success route
 (req : Request , res :Response) => {
-    res.redirect('/auth/success');
+    const user : User = req.user as User; 
+    console.log("Display Name ",user.displayName);
+    res.redirect(`/auth/success?user=${user.displayName}`);
 });
 
 router.get('/success',(req : Request , res : Response) => {
-        console.log('Profile name : ',req.user);
-        const user : User = req.user as User;  
-        res.send(`Hello ${user.displayName}`);
+        const user = req.query.user;  
+        res.send(`Hello ${user}`);
       
 });
 

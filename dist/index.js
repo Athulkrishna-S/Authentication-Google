@@ -5,8 +5,15 @@ import authRoutes from './routes/authRoutes.js';
 const app = express();
 const PORT = process.env.PORT;
 app.use(express.json());
+app.use((req, res, next) => {
+    if (req.path === '/login') {
+        res.redirect('/auth');
+    }
+    else {
+        next();
+    }
+});
 app.use('/auth', authRoutes);
-console.log(process.env.PORT);
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
