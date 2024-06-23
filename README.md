@@ -1,6 +1,6 @@
 # Express.js Google OAuth2 Authentication
 
-This repository contains an implementation of Google OAuth2 authentication using Express.js. The application is structured with TypeScript and demonstrates how to use Passport.js with the Google OAuth 2.0 strategy to authenticate users.
+This repository contains an implementation of Google OAuth2 authentication using Express.js. The application is structured with ##TypeScript and demonstrates how to use ##Passport.js with the Google OAuth 2.0 strategy to authenticate users.
 
 ## Table of Contents
 
