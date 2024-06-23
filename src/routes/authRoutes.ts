@@ -19,7 +19,8 @@ router.use(passport.initialize());
   
 interface User { 
     id: string,
-    displayName: string
+    displayName: string,
+    emails: string[];
 }
 
 
@@ -31,9 +32,11 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:3000/auth/google/callback'
 }, function verify(accessToken: string, refreshToken: string, profile: any, cb: VerifyCallback): void {
     // verification logic here
+    console.log("Profile ",profile)
     const user :User  = {
         id : profile.id,
-        displayName : profile.displayName
+        displayName : profile.displayName,
+        emails : profile.emails
     };
 
     return cb(null , user);
@@ -50,12 +53,13 @@ passport.serializeUser((user: Express.User, done) => {
   });
 
   */
-router.get('/google', passport.authenticate('google',{scope : ['profile']}));
+router.get('/google', passport.authenticate('google',{scope : ['profile','email']}));
 router.get('/google/callback',passport.authenticate('google',{session : false,failureRedirect : '/'}),
 // success route
 (req : Request , res :Response) => {
     const user : User = req.user as User; 
     console.log("Display Name ",user.displayName);
+    console.log("Emails ",user.emails);
     res.redirect(`/auth/success?user=${user.displayName}`);
 });
 

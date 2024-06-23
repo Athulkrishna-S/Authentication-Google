@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT;
 app.use(express.json());
 app.use((req, res, next) => {
-    if (req.path === '/login') {
+    if (req.path === '/') {
         res.redirect('/auth');
     }
     else {

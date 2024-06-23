@@ -17,9 +17,11 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:3000/auth/google/callback'
 }, function verify(accessToken, refreshToken, profile, cb) {
     // verification logic here
+    console.log("Profile ", profile);
     const user = {
         id: profile.id,
-        displayName: profile.displayName
+        displayName: profile.displayName,
+        emails: profile.emails
     };
     return cb(null, user);
 }));
@@ -33,12 +35,13 @@ passport.serializeUser((user: Express.User, done) => {
   });
 
   */
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { session: false, failureRedirect: '/' }), 
 // success route
 (req, res) => {
     const user = req.user;
     console.log("Display Name ", user.displayName);
+    console.log("Emails ", user.emails);
     res.redirect(`/auth/success?user=${user.displayName}`);
 });
 router.get('/success', (req, res) => {
