@@ -1,4 +1,4 @@
-name : Test CI/CD
+name: Test CI/CD
 
 on:
   push:
@@ -9,17 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
 
+    - name: Install dependencies
+      run: npm install
 
-    -uses: actions/checkout@v4
+    - name: Install TypeScript
+      run: npm install -g typescript
 
-    -name: Install dependencies
-     run:  npm install
-
-
-    -name: Install TypeScript
-     run: npm install -g typescript
-
-
-    -name: Run test
-     run: npm run test
+    - name: Run test
+      run: npm run test
