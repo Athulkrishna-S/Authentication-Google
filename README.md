@@ -44,3 +44,4 @@ To run the application, execute the following command:
 ```sh
 npm start
 
+the repo was Authored by Athulkrishna S
